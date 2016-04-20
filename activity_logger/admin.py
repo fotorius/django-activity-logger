@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Entry
+from models import *
 
 from django.contrib.admin.filters import SimpleListFilter
 
@@ -38,3 +38,4 @@ class EntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Entry,EntryAdmin)
+admin.site.register(Location)

@@ -1,0 +1,33 @@
+<div id="map"></div>
+<script>
+//Load google maps
+function initMap() {
+  var myLatLng = {lat: 15, lng: -19};
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 2,
+    center: myLatLng
+  });
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    //Get markers when map is fully loaded
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        data = JSON.parse(xhttp.responseText);
+        for(l in data){
+          var myLatLng = new google.maps.LatLng(data[l].fields.latitude,data[l].fields.longitude);
+          var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: data[l].fields.country
+          });
+        }
+      }
+    };
+    xhttp.open("GET", "{% if get_locations_url %}{{get_locations_url}}{% else %}{% url 'activity_logger/get_locations' %}{% endif %}", true);
+    xhttp.send();
+  });
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ACTIVITY_LOGGER_GOOGLE_API_KEY}}&callback=initMap"></script>
+

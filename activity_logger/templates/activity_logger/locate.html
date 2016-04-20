@@ -1,0 +1,22 @@
+{% extends 'activity_logger/base.html' %}
+
+{% block styles %}{{block.super}}
+<style>
+  #locations{
+    text-align: center;
+  }
+  #map {
+    display: inline-block;
+    height: 500px;
+    width: 100%;
+    max-width: 700px;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<div id="locations">
+  <h1>Locations</h1>
+  {% include 'activity_logger/map.html' %}
+</div>
+{% endblock %}

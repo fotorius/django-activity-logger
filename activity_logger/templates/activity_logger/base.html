@@ -1,0 +1,21 @@
+{% load i18n %}<!DOCTYPE html>
+<html>
+<head>
+  <title>{% if title %}{{title}}{% else %}{% trans "Locate" %}{% endif %}</title>
+  {% block styles %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+  }
+</style>
+  {% endblock %}
+</head>
+<body>
+  <div id="main">{% block main %}{% endblock %}</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>
+
