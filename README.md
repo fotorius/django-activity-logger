@@ -38,3 +38,19 @@ $ migrate
 Django Activity Logger will track all activity and will be shown in the
 admin site. There are several filters that can be used to aquire your
 specific need.
+
+### Getting Locations
+
+Using this tool you can retreive the location of your requests using
+http://ip-api.com. Simply add the url to your urls.py file.
+```
+urlpatterns = [
+   ...    
+    url(r'^activity_logger/', include('activity_logger.urls')),
+    ...
+```
+And add your Google API Key (https://console.developers.google.com/)
+to your settings file.
+```
+ACTIVITY_LOGGER_GOOGLE_API_KEY = 'your-api-key'
+```
