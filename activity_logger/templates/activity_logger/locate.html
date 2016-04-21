@@ -1,22 +1,14 @@
-{% extends 'activity_logger/base.html' %}
-
-{% block styles %}{{block.super}}
 <style>
-  #locations{
+  .locations{
     text-align: center;
   }
-  #map {
-    display: inline-block;
-    height: 500px;
+  .map-iframe{
     width: 100%;
-    max-width: 700px;
+    border: none;
+    height: 500px;
   }
 </style>
-{% endblock %}
-
-{% block main %}
-<div id="locations">
-  <h1>Locations</h1>
-  {% include 'activity_logger/map.html' %}
+<div class="locations">
+  <h2>Locations</h2>
+  <iframe class="map-iframe" src="{% url 'activity_logger/locate_iframe' %}"></iframe>
 </div>
-{% endblock %}

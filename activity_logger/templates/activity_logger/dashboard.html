@@ -1,0 +1,35 @@
+{% extends 'activity_logger/base.html' %}
+
+{% block styles %}{{block.super}}
+{% endblock %}
+
+{% block main %}
+<div class="sidebar">
+  <ul>{% for tab in tabs %}
+    <li><a href="#{{tab.anchor}}" data-remote="{{tab.remote}}" data-toggle="container" data-target="#main-panel">{{tab.title}}</a></li>{% endfor %}
+  </ul>
+</div>
+<div id="main-panel"></div>
+{% endblock %}
+{% block scripts %}{{block.super}}
+<script>
+var tabs = document.querySelectorAll('[data-toggle="container"]');
+for(var i=0;i<tabs.length;i++){
+  // Add click event listeners to sidebar menu
+  tabs[i].addEventListener('click',function(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById('main-panel').innerHTML = xhttp.responseText;
+      }
+    };
+    xhttp.open("GET", this.dataset.remote, true);
+    xhttp.send();
+  });
+
+  // Automatically load first element
+  if(!i) tabs[i].click();
+}
+</script>
+
+{% endblock %}

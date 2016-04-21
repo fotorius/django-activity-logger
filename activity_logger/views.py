@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
+
+#i18n
+from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 
 import json, urllib3
 from time import sleep
@@ -10,11 +14,32 @@ from time import sleep
 from models import *
 
 @staff_member_required
-def locate(request):
+def dashboard(request):
+    title = _('Dashboard')
+    tabs = [
+        {
+            'title':_('Locations'),
+            'remote':reverse('activity_logger/locate'),
+            'anchor':'locations',
+        },
+    ]
     c = {
-       'ACTIVITY_LOGGER_GOOGLE_API_KEY':settings.ACTIVITY_LOGGER_GOOGLE_API_KEY, 
+        'title':title,
+        'tabs':tabs,
+        'ACTIVITY_LOGGER_GOOGLE_API_KEY':settings.ACTIVITY_LOGGER_GOOGLE_API_KEY, 
     }
-    return render(request,'activity_logger/locate.html',c)
+    return render(request,'activity_logger/dashboard.html',c)
+
+@staff_member_required
+def locate_iframe(request):
+    c = {
+        'ACTIVITY_LOGGER_GOOGLE_API_KEY':settings.ACTIVITY_LOGGER_GOOGLE_API_KEY, 
+    }
+    return render(request,'activity_logger/locate-iframe.html',c)
+
+@staff_member_required
+def locate(request):
+    return render(request,'activity_logger/locate.html',{})
 
 @staff_member_required
 def get_locations(request):

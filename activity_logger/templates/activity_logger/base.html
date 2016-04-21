@@ -1,20 +1,17 @@
-{% load i18n %}<!DOCTYPE html>
+{% load i18n %}{% load staticfiles %}<!DOCTYPE html>
 <html>
 <head>
   <title>{% if title %}{{title}}{% else %}{% trans "Locate" %}{% endif %}</title>
   {% block styles %}
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family:"Trebuchet MS", Helvetica, sans-serif;
-  }
-</style>
+<link href="{% static 'activity_logger/stylesheets/styles.css' %}" rel="stylesheet" type="text/css" />
   {% endblock %}
 </head>
 <body>
+<h1 id="page-title"><a href="{% url 'activity_logger/dashboard' %}">Activity Logger</a>: {{title}}</h1>
   <div id="main">{% block main %}{% endblock %}</div>
+<div id="footer">
+<a href="https://github.com/devalfrz/django-activity-logger" target="_blank">Django Activity Logger</a>
+</div>
 {% block scripts %}{% endblock %}
 </body>
 </html>
