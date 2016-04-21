@@ -54,3 +54,7 @@ to your settings file.
 ```
 ACTIVITY_LOGGER_GOOGLE_API_KEY = 'your-api-key'
 ```
+You can have access to the dashboard by going to:
+```
+http://your-awesome-project.com/activity_logger
+```

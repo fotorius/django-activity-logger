@@ -32,8 +32,8 @@ class UserFilterSpec(SimpleListFilter):
         return queryset
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ('created', 'remote_addr','http_referer','path','user','content',)
-    search_fields = ('remote_addr','content','path','user__username',)
+    list_display = ('created', 'remote_addr','http_referer','path','user','description',)
+    search_fields = ('remote_addr','description','path','user__username',)
     list_filter = (UserFilterSpec,)
 
 

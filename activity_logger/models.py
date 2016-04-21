@@ -36,7 +36,7 @@ class Entry(models.Model):
    path = models.CharField(_('Path'),max_length=256)
    user = models.ForeignKey(User,verbose_name=_('User'),null=True,blank=True)
    created = models.DateTimeField(_('Created'),auto_now_add=True)
-   content = models.CharField(_('Content'),max_length=128)
+   description = models.CharField(_('Description'),max_length=128,null=True,blank=True)
    location = models.ForeignKey(Location,verbose_name=_('Location'),null=True,blank=True)
    remote_addr_is_private = models.NullBooleanField(null=True)
    is_secure = models.BooleanField(_('Is Secure'),default=False)
@@ -45,7 +45,7 @@ class Entry(models.Model):
        verbose_name_plural = _('entries')
    
    def __unicode__(self):
-       return self.content
+       return self.description
 
    def get_location(self,force=False):
       """
