@@ -46,7 +46,7 @@ class Entry(models.Model):
    def __unicode__(self):
        return self.content
 
-   def getLocation(self,force=False):
+   def get_location(self,force=False):
       """
       Gets the location from ip-api.com
       """
@@ -54,7 +54,7 @@ class Entry(models.Model):
       if self.location and not force:
           return self.location
       # Return None if the ip was already proven to be private
-      elif self.remote_addr_is_private and not force:
+      if self.remote_addr_is_private and not force:
           return None
 
       # Check if this IP already was identified as private
@@ -75,7 +75,7 @@ class Entry(models.Model):
       ).order_by('-location__created')
       # Return last instance if IP was already located
       if entries and not force:
-          self.location = entries.first().getLocation()
+          self.location = entries.first().get_location()
           self.save()
           return self.location
 

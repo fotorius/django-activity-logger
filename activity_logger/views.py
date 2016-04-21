@@ -21,7 +21,7 @@ def get_locations(request):
     entries = Entry.objects.all()
     http = urllib3.PoolManager()
     for entry in entries:
-            entry.getLocation()
+            entry.get_location()
     JSONSerializer = serializers.get_serializer("json")
     json_serializer = JSONSerializer()
     json_serializer.serialize(Location.objects.all())
