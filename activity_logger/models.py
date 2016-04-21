@@ -39,6 +39,7 @@ class Entry(models.Model):
    content = models.CharField(_('Content'),max_length=128)
    location = models.ForeignKey(Location,verbose_name=_('Location'),null=True,blank=True)
    remote_addr_is_private = models.NullBooleanField(null=True)
+   is_secure = models.BooleanField(_('Is Secure'),default=False)
 
    class Meta:
        verbose_name_plural = _('entries')
