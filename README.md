@@ -58,3 +58,8 @@ You can have access to the dashboard by going to:
 ```
 http://your-awesome-project.com/activity_logger
 ```
+#### Note
+
+In order for the traffic graphs to operate correctly, you need to install pytz
+and configure your database accordingly as described in the Django documentation:
+https://docs.djangoproject.com/en/dev/ref/models/querysets/#database-time-zone-definitions
