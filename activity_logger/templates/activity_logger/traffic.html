@@ -1,5 +1,22 @@
+{% load activity_logger %}<div class="traffic">
 <h2>Traffic</h2>
-
+<table class="graph">
+<tr>
+<td>
+  <table class="scale" style="height:{{graph_height}}px;">
+   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max}}</td><tr>
+   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|multiply:2|floatformat:"0"}}</td><tr>
+   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|floatformat:"0"}}</td><tr>
+   <tr><td height=""></td><tr>
+  </table>
+</td>
 {% for es in entries %}
-{{forloop.counter}}. {{es.count}}<br>
+<td><div class="y" style="height:{{es.count|divide:max|multiply:graph_height|floatformat:"0"}}px"></div></td>
 {% endfor %}
+</tr><tr>
+{% for es in entries %}
+<td>{{forloop.counter}}</td>
+{% endfor %}
+</tr>
+</table>
+</div>

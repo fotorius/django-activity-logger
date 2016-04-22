@@ -48,13 +48,15 @@ def traffic(request):
     update_entry_locations(entries)
     entries = []
     max = 0
-    for i in range(1,7):
-        entries.append(Entry.objects.filter(created__week_day=i))
+    for i in range(1,32):
+        entries.append(Entry.objects.filter(created__day=i))
         if entries[i-1].count() > max:
             max = entries[i-1].count()
     c = {
         'entries':entries,
         'max':max,
+        'graph_height':500,
+        'graph_width':950,
     }
     return render(request,'activity_logger/traffic.html',c)
 
