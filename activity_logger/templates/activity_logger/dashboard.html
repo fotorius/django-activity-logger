@@ -3,24 +3,38 @@
 {% block styles %}{{block.super}}
 {% endblock %}
 
+{% block body_class %}{{block.super}} dashboard{% endblock %}
+
 {% block main %}
 <div class="sidebar">
   <ul>{% for tab in tabs %}
-    <li><a href="#{{tab.anchor}}" data-remote="{{tab.remote}}" data-toggle="container" data-target="#main-panel">{{tab.title}}</a></li>{% endfor %}
+    <li><a href="#{{tab.anchor}}" data-remote="{{tab.remote}}" data-toggle="container" data-target="#main-panel" >{{tab.title}}</a></li>{% endfor %}
   </ul>
 </div>
 <div id="main-panel"></div>
 {% endblock %}
 {% block scripts %}{{block.super}}
 <script>
+// Set active class to menu items
+function set_active_tab(this_anchor){
+  var tabs = document.querySelectorAll('[data-toggle="container"]');
+  var this_tab = document.querySelector('[data-toggle="container"][href="'+this_anchor+'"]');
+  for(var i=0;i<tabs.length;i++){
+    tabs[i].className = tabs[i].className.replace(/\bactive\b/,'');
+  }
+  this_tab.className = this_tab.className ? this_tab.className + ' active':'active';
+}
+
 var tabs = document.querySelectorAll('[data-toggle="container"]');
 for(var i=0;i<tabs.length;i++){
   // Add click event listeners to sidebar menu
-  tabs[i].addEventListener('click',function(){
+  tabs[i].addEventListener('click',function(e){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
         document.getElementById('main-panel').innerHTML = xhttp.responseText;
+        console.log(e);
+        set_active_tab(e.toElement.getAttribute('href'));
       }
     };
     xhttp.open("GET", this.dataset.remote, true);

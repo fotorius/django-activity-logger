@@ -4,7 +4,6 @@ html, body {
   padding: 0;
   font-family:"Trebuchet MS", Helvetica, sans-serif;
   a,a:visited,a:hover{
-    //text-decoration: none;
     color: black;
   }
   h1#page-title{
@@ -66,7 +65,7 @@ html, body {
             width: 100%;
             background-color: #EEEEEE;
             padding: 20px 20px;
-            &:hover{
+            &:hover,&.active{
               background-color: #DDDDDD;
             }
           }

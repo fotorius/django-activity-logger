@@ -8,10 +8,11 @@ from django.conf import settings
 #i18n
 from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 
-import json, urllib3
+import json
 from time import sleep
 
-from models import *
+from models import Entry, Location
+from utils import update_entry_locations
 
 @staff_member_required
 def dashboard(request):
@@ -25,6 +26,11 @@ def dashboard(request):
             'remote':reverse('activity_logger/locate'),
             'anchor':'locations',
         },
+        {
+            'title':_('Traffic'),
+            'remote':reverse('activity_logger/traffic'),
+            'anchor':'traffic',
+        },
     ]
     c = {
         'title':title,
@@ -32,6 +38,16 @@ def dashboard(request):
         'ACTIVITY_LOGGER_GOOGLE_API_KEY':settings.ACTIVITY_LOGGER_GOOGLE_API_KEY, 
     }
     return render(request,'activity_logger/dashboard.html',c)
+
+@staff_member_required
+def traffic(request):
+    entries = Entry.objects.all()
+    update_entry_locations(entries)
+    entries = Entry.objects.all()
+    c = {
+        'entries':entries,
+    }
+    return render(request,'activity_logger/traffic.html',c)
 
 @staff_member_required
 def locate_iframe(request):
@@ -60,10 +76,7 @@ def get_locations(request):
     Calling this function will update the entries with its corresponding
     location.
     """
-    entries = Entry.objects.all()
-    http = urllib3.PoolManager()
-    for entry in entries:
-            entry.get_location()
+    update_entry_locations(Entry.objects.all())
     JSONSerializer = serializers.get_serializer("json")
     json_serializer = JSONSerializer()
     json_serializer.serialize(Location.objects.all())

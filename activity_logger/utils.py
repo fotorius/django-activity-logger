@@ -1,4 +1,12 @@
-from models import *
+from models import Entry, Location
+
+
+def update_entry_locations(queryset):
+    """
+    Update the locations of certian queryset of Entries
+    """
+    for entry in queryset:
+            entry.get_location()
 
 
 def log_entry(request,description=None):

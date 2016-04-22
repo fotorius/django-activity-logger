@@ -6,7 +6,7 @@
 <link href="{% static 'activity_logger/stylesheets/styles.css' %}" rel="stylesheet" type="text/css" />
   {% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 <h1 id="page-title"><a href="{% url 'activity_logger/dashboard' %}">Activity Logger</a>: {{title}}</h1>
   <div id="main">{% block main %}{% endblock %}</div>
 <div id="footer">
