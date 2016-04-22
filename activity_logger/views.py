@@ -41,11 +41,20 @@ def dashboard(request):
 
 @staff_member_required
 def traffic(request):
+    """
+    Returns the list of entries on an specific list of filters.
+    """
     entries = Entry.objects.all()
     update_entry_locations(entries)
-    entries = Entry.objects.all()
+    entries = []
+    max = 0
+    for i in range(1,7):
+        entries.append(Entry.objects.filter(created__week_day=i))
+        if entries[i-1].count() > max:
+            max = entries[i-1].count()
     c = {
         'entries':entries,
+        'max':max,
     }
     return render(request,'activity_logger/traffic.html',c)
 

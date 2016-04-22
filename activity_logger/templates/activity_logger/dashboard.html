@@ -15,8 +15,11 @@
 {% endblock %}
 {% block scripts %}{{block.super}}
 <script>
-// Set active class to menu items
-function set_active_tab(this_anchor){
+
+var xhr = new XMLHttpRequest();
+
+function setActiveTab(this_anchor){
+  // Set active class to menu items
   var tabs = document.querySelectorAll('[data-toggle="container"]');
   var this_tab = document.querySelector('[data-toggle="container"][href="'+this_anchor+'"]');
   for(var i=0;i<tabs.length;i++){
@@ -25,25 +28,38 @@ function set_active_tab(this_anchor){
   this_tab.className = this_tab.className ? this_tab.className + ' active':'active';
 }
 
-var tabs = document.querySelectorAll('[data-toggle="container"]');
-for(var i=0;i<tabs.length;i++){
-  // Add click event listeners to sidebar menu
-  tabs[i].addEventListener('click',function(e){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
-        document.getElementById('main-panel').innerHTML = xhttp.responseText;
-        console.log(e);
-        set_active_tab(e.toElement.getAttribute('href'));
+function initTabs(data_toggle){
+  // Tabs initialization
+  var tabs = document.querySelectorAll('[data-toggle="'+data_toggle+'"]');
+  for(var i=0;i<tabs.length;i++){
+    // Add click event listeners to sidebar menu
+    tabs[i].addEventListener('click',function(e){
+      // Abort request if it is still alive
+      if(xhr.status == 0 && xhr.readyState == 1){
+        xhr.abort();
       }
-    };
-    xhttp.open("GET", this.dataset.remote, true);
-    xhttp.send();
-  });
-
-  // Automatically load first element
-  if(!i) tabs[i].click();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById('main-panel').innerHTML = xhr.responseText;
+          setActiveTab(e.toElement.getAttribute('href'));
+        }
+      };
+      xhr.open("GET", this.dataset.remote, true);
+      xhr.send();
+    });
+  }
+  // Load current tab
+  var current_hash = document.querySelector('[data-toggle="'+data_toggle+'"][href="'+location.hash+'"]');
+  if(current_hash)
+    current_hash.click();
+  // Or load first tab
+  else if(tabs.length)// Automatically load first element
+    tabs[0].click();
 }
+
+// Initialize tabs
+initTabs('container');
+
 </script>
 
 {% endblock %}

@@ -1,2 +1,5 @@
 <h2>Traffic</h2>
-{{entries.count}}
+
+{% for es in entries %}
+{{forloop.counter}}. {{es.count}}<br>
+{% endfor %}
