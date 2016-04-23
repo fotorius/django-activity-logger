@@ -5,24 +5,6 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 
-def fix_paths(apps,schema_editor):
-    """
-    Copy the information from the Entry.path to a Path.name and reference the new
-    instance from Entry.path_name to Path
-    """
-    Entry = apps.get_model("activity_logger", "Entry")
-    Path = apps.get_model("activity_logger", "Path")
-
-    entries = Entry.objects.all()
-    for entry in entries:
-        try:
-            path = Path.objects.get(name=entry.deprecated_path)
-        except Entry.DoesNotExist,__fake__.DoesNotExist:
-            path = Path(name=entry.deprecated_path).save()
-        entry.path_name = path
-        entry.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -40,5 +22,4 @@ class Migration(migrations.Migration):
             name='deprecated_path',
             field=models.CharField(max_length=256, null=True, verbose_name='Path'),
         ),
-        migrations.RunPython(fix_paths),
     ]

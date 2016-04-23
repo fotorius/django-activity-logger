@@ -32,10 +32,11 @@ class UserFilterSpec(SimpleListFilter):
         return queryset
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ('created', 'remote_addr','http_referer','deprecated_path','user','description',)
-    search_fields = ('remote_addr','description','deprecated_path','user__username',)
+    list_display = ('created', 'remote_addr','http_referer','path','user','description',)
+    search_fields = ('remote_addr','description','path','user__username',)
     list_filter = (UserFilterSpec,)
 
 
 admin.site.register(Entry,EntryAdmin)
+admin.site.register(Path)
 admin.site.register(Location)

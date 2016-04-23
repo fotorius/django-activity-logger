@@ -1,4 +1,4 @@
-from models import Entry, Location
+from models import Entry, Location, Path
 
 
 def update_entry_locations(queryset):
@@ -21,13 +21,19 @@ def log_entry(request,description=None):
        remote_addr = x_forwarded_for.split(',')[0]
    else:
        remote_addr = request.META.get('REMOTE_ADDR')
+   
+   try:
+       path = Path.objects.get(name=request.path)
+   except Path.DoesNotExist:
+       path = Path(name=request.path).save()
 
+   
    e = Entry(
        http_referer = request.META.get('HTTP_REFERER'),
        http_user_agent = request.META.get('HTTP_USER_AGENT'),
        remote_addr = request.META.get('REMOTE_ADDR'),
+       path=path,
        request_method = request.META.get('REQUEST_METHOD')[:8],
-       path = request.path,
        user = request.user if not request.user.is_anonymous() else None,
        description = description,
        is_secure = request.is_secure(),
