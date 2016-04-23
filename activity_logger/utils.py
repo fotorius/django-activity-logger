@@ -25,7 +25,8 @@ def log_entry(request,description=None):
     try:
         path = Path.objects.get(name=request.path)
     except Path.DoesNotExist:
-        path = Path(name=request.path).save()
+        path = Path(name=request.path)
+        path.save()
  
     
     e = Entry(
