@@ -12,7 +12,7 @@ class UserFilterSpec(SimpleListFilter):
     
     def lookups(self, request, model_admin):
         return (
-            ('0', _('Anonymus'), ),
+            ('0', _('Anonymous'), ),
             ('1', _('Authenticated'), ),
             ('2', _('Staff'), ),
             ('3', _('Not Staff'), ),

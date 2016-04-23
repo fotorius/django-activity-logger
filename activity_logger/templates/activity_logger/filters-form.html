@@ -1,0 +1,5 @@
+{% load i18n %}
+<form action="{{action}}" method="POST" class="filters" onSubmit="event.preventDefault(); submitFilter(event);"><div class="fields">{{form.as_p}}</div>
+  {% csrf_token %}
+  <div class="filter"><button>{% trans "Filter" %}</button></div>
+</form>

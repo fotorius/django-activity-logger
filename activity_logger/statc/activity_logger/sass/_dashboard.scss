@@ -1,8 +1,23 @@
+@import "compass/css3/transform";
+
 body.dashboard{
   h2{
     text-align: center;
   }
-  .locations,.traffic{
+  button{
+    color: white;
+    font-weight: bold;
+    background-color: cornflowerblue;
+    padding: 10px 18px;
+    font-size: 1em;
+    border: none;
+  }
+  .vertical{
+    @include transform(rotate(90deg),translate(-50%));
+    display:inline-block;
+    width: 25px;
+  }
+  #main-panel{
     text-align: center;
   }
   .map-iframe{
@@ -10,24 +25,43 @@ body.dashboard{
     border: none;
     height: 500px;
   }
-  table.graph{
-    display: inline;
-    tr{
-      td{
-        vertical-align: bottom;
-        width: 25px;
-        .y{
-          width: 100%;
-          background-color: teal;
-          display: inline-block;
-        }
-        table.scale{
-          display: inline-block;
-          tr td{
-            vertical-align:top;
+  .traffic{
+    table.graph{
+      display: inline;
+      tr{
+        td{
+          vertical-align: bottom;
+          width: 25px;
+          .y{
+            width: 100%;
+            background-color: teal;
+            display: inline-block;
+          }
+          table.scale{
+            display: inline-block;
+            tr td{
+              vertical-align:top;
+            }
           }
         }
       }
+    }
+  }
+  .filters{
+    text-align: center;
+    background-color: beige;
+    width: 100%;
+    max-width: 700px;
+    display: inline-block;
+    .fields{
+      padding: 15px;
+      display: inline-block;
+      text-align: left;
+    }
+    .filter{
+      padding: 15px;
+      display: inline-block;
+      vertical-align: bottom;
     }
   }
 }

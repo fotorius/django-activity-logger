@@ -16,7 +16,7 @@
 {% block scripts %}{{block.super}}
 <script>
 
-var xhr = new XMLHttpRequest();
+var xhttp = new XMLHttpRequest();
 
 function setActiveTab(this_anchor){
   // Set active class to menu items
@@ -35,17 +35,17 @@ function initTabs(data_toggle){
     // Add click event listeners to sidebar menu
     tabs[i].addEventListener('click',function(e){
       // Abort request if it is still alive
-      if(xhr.status == 0 && xhr.readyState == 1){
-        xhr.abort();
+      if(xhttp.status == 0 && xhttp.readyState == 1){
+        xhttp.abort();
       }
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          document.getElementById('main-panel').innerHTML = xhr.responseText;
+      xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          document.getElementById('main-panel').innerHTML = xhttp.responseText;
           setActiveTab(e.toElement.getAttribute('href'));
         }
-      };
-      xhr.open("GET", this.dataset.remote, true);
-      xhr.send();
+      }
+      xhttp.open("GET", this.dataset.remote, true);
+      xhttp.send();
     });
   }
   // Load current tab
@@ -55,6 +55,22 @@ function initTabs(data_toggle){
   // Or load first tab
   else if(tabs.length)// Automatically load first element
     tabs[0].click();
+}
+
+// Filters
+function submitFilter(e){
+  var form = e.srcElement;
+  // Abort request if it is still alive
+  if(xhttp.status == 0 && xhttp.readyState == 1){
+    xhttp.abort();
+  }
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById('main-panel').innerHTML = xhttp.responseText;
+    }
+  }
+  xhttp.open("POST", form.action, true);
+  xhttp.send(new FormData(form));
 }
 
 // Initialize tabs

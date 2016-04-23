@@ -35,4 +35,3 @@ def log_entry(request,description=None):
    e.save()
    return e
     
-
