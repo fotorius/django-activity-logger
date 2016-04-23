@@ -126,6 +126,7 @@ def traffic(request):
         'graph_width':950,
         'form':form,
         'action':reverse('activity_logger/traffic'),
+        'total':filtered_entries.count(),
     }
     return render(request,'activity_logger/traffic.html',c)
 

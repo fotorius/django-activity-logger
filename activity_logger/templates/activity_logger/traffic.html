@@ -4,6 +4,7 @@
 {% if not max %}
 <h3>{% trans "This query didn't return any results" %}</h3>
 {% else %}
+<h4>{% trans "Total Hits: " %}{{total}}</h4>
 <table class="graph">
 <tr>
 <td>
