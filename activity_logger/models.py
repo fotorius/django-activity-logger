@@ -40,7 +40,6 @@ class Entry(models.Model):
     remote_addr = models.CharField(_('Remote Address'),max_length=40)
     request_method = models.CharField(_('Request Method'),max_length=8)
     path = models.ForeignKey(Path,verbose_name=_('Path'))
-    deprecated_path = models.CharField(_('Path'),max_length=256,null=True)
     user = models.ForeignKey(User,verbose_name=_('User'),null=True,blank=True)
     created = models.DateTimeField(_('Created'),auto_now_add=True)
     description = models.CharField(_('Description'),max_length=128,null=True,blank=True)
