@@ -38,4 +38,5 @@ class EntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Entry,EntryAdmin)
+admin.site.register(Path)
 admin.site.register(Location)
