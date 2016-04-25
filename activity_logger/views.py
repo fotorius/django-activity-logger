@@ -21,13 +21,19 @@ def dashboard(request):
     """
     This view will show the dashboard of the activity logger.
     """
-    title = _('Dashboard')
-    tabs = [
-        {
-            'title':_('Locations'),
-            'remote':reverse('activity_logger/locate'),
-            'anchor':'locations',
-        },
+
+    title = _('Dashboard') 
+    tabs = []
+    
+    if hasattr(settings, 'ACTIVITY_LOGGER_GOOGLE_API_KEY'):
+        tabs += [
+            {
+                'title':_('Locations'),
+                'remote':reverse('activity_logger/locate'),
+                'anchor':'locations',
+            },
+        ]
+    tabs += [
         {
             'title':_('Traffic'),
             'remote':reverse('activity_logger/traffic'),
