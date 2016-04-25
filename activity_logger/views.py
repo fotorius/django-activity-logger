@@ -43,7 +43,6 @@ def dashboard(request):
     c = {
         'title':title,
         'tabs':tabs,
-        'ACTIVITY_LOGGER_GOOGLE_API_KEY':settings.ACTIVITY_LOGGER_GOOGLE_API_KEY, 
     }
     return render(request,'activity_logger/dashboard.html',c)
 
