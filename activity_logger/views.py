@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
+from django.db.models import Count
 from datetime import timedelta
 
 #i18n
@@ -124,6 +125,9 @@ def traffic(request):
                 max = entries[i].count()
             i += 1
     
+    # Get path hits
+    path_hits = filtered_entries.values('path__name').annotate(c=Count('path')).order_by('-c')
+
     c = {
         'entries':entries,
         'max':max,
@@ -132,6 +136,7 @@ def traffic(request):
         'form':form,
         'action':reverse('activity_logger/traffic'),
         'total':filtered_entries.count(),
+        'path_hits':path_hits,
     }
     return render(request,'activity_logger/traffic.html',c)
 

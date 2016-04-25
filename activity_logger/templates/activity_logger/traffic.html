@@ -25,5 +25,18 @@
 {% endfor %}
 </tr>
 </table>
+
+<div class="path-hits">
+<h4>{% trans "Path Counter" %}</h4>
+<div><table>
+  <thead>
+    <tr><th>{% trans "Hits" %}</th><th>{% trans "Paths" %}</th></tr>
+  </thead>
+  <tbody>{% for path_hit in path_hits %}
+    <tr><td>{{path_hit.c}}</td><td>{{path_hit.path__name}}</td></tr>{% endfor %}
+  </tbody>
+</table></div>
+</div>
+
 {% endif %}
 </div>

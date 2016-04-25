@@ -64,4 +64,22 @@ body.dashboard{
       vertical-align: bottom;
     }
   }
+  .path-hits{
+    &>div{
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    table{
+      display: inline-block;
+      td{
+        text-align: left;
+      }
+      tr:nth-child(even){
+        background-color: #DDD;
+      }
+      th{
+        border-bottom: solid black 1px;
+      }
+    }
+  }
 }
