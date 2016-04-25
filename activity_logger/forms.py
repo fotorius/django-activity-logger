@@ -30,15 +30,8 @@ class SearchEntriesForm(forms.Form):
         (YEAR,_('Year')),
     )
     
-    BAR = '0'
-
-    GRAPH_CHOICES = (
-        (BAR,_('Bar')),
-    )
-
     start_date = forms.DateField(label=_('Start Date'),required=False)
     end_date = forms.DateField(label=_('End Date'),required=False)
     users = forms.ChoiceField(label=_('Users'),initial=ALL,choices=USER_CHOICES)
     display_by = forms.ChoiceField(label=_('Display By'),initial=DAY_OF_THE_MONTH,choices=DISPLAY_BY_CHOICES)
     path = forms.CharField(label=_('Path'),required=False, widget=forms.TextInput(attrs={'placeholder': _('All')}))
-    graph = forms.ChoiceField(label=_('Graph'),initial=BAR,choices=GRAPH_CHOICES)

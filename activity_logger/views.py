@@ -79,9 +79,6 @@ def traffic(request):
            if form.cleaned_data['path']:
                filtered_entries = filtered_entries.filter(path__name=form.cleaned_data['path'])
 
-           # Graph type
-           graph = form.cleaned_data['graph']
-
     else:
         # Initialize form
         form = SearchEntriesForm(initial={
@@ -89,7 +86,6 @@ def traffic(request):
             'end_date':filtered_entries.first().created,
         })
         display_by = form.fields['display_by'].initial
-        graph = form.fields['graph'].initial
     
     """
     TODO: Show more information about the traffic such as location count and 
