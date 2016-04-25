@@ -75,6 +75,10 @@ def traffic(request):
            # Display By
            display_by = form.cleaned_data['display_by']
 
+           # Filter by Path
+           if form.cleaned_data['path']:
+               filtered_entries = filtered_entries.filter(path__name=form.cleaned_data['path'])
+
            # Graph type
            graph = form.cleaned_data['graph']
 
