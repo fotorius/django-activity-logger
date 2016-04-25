@@ -167,9 +167,20 @@ def get_locations(request):
     Calling this function will update the entries with its corresponding
     location.
     """
+    # Update all Entry Locations
     update_entry_locations(Entry.objects.all())
+    
+    # Get locations
+    locations = Location.objects.all()
+    # Serialize and render
     JSONSerializer = serializers.get_serializer("json")
     json_serializer = JSONSerializer()
-    json_serializer.serialize(Location.objects.all())
+    try:
+        # Discriminate duplicates if possible
+        json_serializer.serialize(locations.distinct('longitude','latitude'))
+    except NotImplementedError:
+        # If not render all
+        json_serializer.serialize(locations)
+    
     data = json_serializer.getvalue()
     return HttpResponse(data,content_type="application/json")
