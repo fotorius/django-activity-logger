@@ -24,8 +24,13 @@ def dashboard(request):
     """
 
     title = _('Dashboard') 
-    tabs = []
-    
+    tabs = [
+        {
+            'title':_('Traffic'),
+            'remote':reverse('activity_logger/traffic'),
+            'anchor':'traffic',
+        },
+    ]
     if hasattr(settings, 'ACTIVITY_LOGGER_GOOGLE_API_KEY'):
         tabs += [
             {
@@ -34,13 +39,6 @@ def dashboard(request):
                 'anchor':'locations',
             },
         ]
-    tabs += [
-        {
-            'title':_('Traffic'),
-            'remote':reverse('activity_logger/traffic'),
-            'anchor':'traffic',
-        },
-    ]
     c = {
         'title':title,
         'tabs':tabs,
