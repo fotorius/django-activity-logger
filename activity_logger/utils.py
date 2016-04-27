@@ -24,6 +24,9 @@ def log_entry(request,description=None):
     
     try:
         path = Path.objects.get(name=request.path)
+    except Path.MultipleObjectsReturned:
+        paths = Path.objects.filter(name=request.path)
+        path = paths[0]
     except Path.DoesNotExist:
         path = Path(name=request.path)
         path.save()
