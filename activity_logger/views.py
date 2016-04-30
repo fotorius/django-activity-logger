@@ -51,6 +51,9 @@ def traffic(request):
     """
     Returns the list of entries on an specific list of filters.
     """
+    # Initialize
+    display_by = None
+    
     # Update all Entries
     filtered_entries = Entry.objects.all()
 
