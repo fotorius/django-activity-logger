@@ -1,7 +1,10 @@
 {% load i18n %}{% load staticfiles %}<!DOCTYPE html>
 <html>
 <head>
-  <title>{% if title %}{{title}}{% else %}{% trans "Locate" %}{% endif %}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{title}}{% else %}{% trans "Activity Logger" %}{% endif %}</title>
   {% block styles %}
 <link href="{% static 'activity_logger/stylesheets/styles.css' %}" rel="stylesheet" type="text/css" />
   {% endblock %}
