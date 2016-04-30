@@ -26,21 +26,24 @@ body.dashboard{
     height: 500px;
   }
   .traffic{
-    table.graph{
-      display: inline;
-      tr{
-        td{
-          vertical-align: bottom;
-          width: 25px;
-          .y{
-            width: 100%;
-            background-color: teal;
-            display: inline-block;
-          }
-          table.scale{
-            display: inline-block;
-            tr td{
-              vertical-align:top;
+    .graph{
+      min-width: 940px;
+      &>table{
+        display: inline;
+        tr{
+          td{
+            vertical-align: bottom;
+            width: 25px;
+            .y{
+              width: 100%;
+              background-color: teal;
+              display: inline-block;
+            }
+            table.scale{
+              display: inline-block;
+              tr td{
+                vertical-align:top;
+              }
             }
           }
         }

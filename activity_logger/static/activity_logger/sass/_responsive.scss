@@ -1,0 +1,35 @@
+
+@media screen and (max-width: 600px) {
+  body{
+    h1#page-title{
+      position: inherit;
+      margin-bottom:0;
+      font-size: 1.2em;
+      margin-bottom: 0;
+      padding: 10px;
+    }
+    #main{
+      &>.sidebar{
+        position: inherit;
+        padding: 0;
+        width: 100%;
+      }
+      &>#main-panel{
+        margin: 0;
+        margin-bottom: 60px;
+        width: 100%;
+        padding: 0;
+        overflow-x: hidden;
+      }
+    }
+  }
+  .overflow{
+    overflow-x: auto;
+  }
+  .traffic{
+    .path-hits{
+      width: 100%;
+    }
+  }
+}
+

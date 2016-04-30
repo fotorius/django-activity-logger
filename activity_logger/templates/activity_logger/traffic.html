@@ -5,37 +5,40 @@
 <h3>{% trans "This query didn't return any results" %}</h3>
 {% else %}
 <h4>{% trans "Total Hits: " %}{{total}}</h4>
-<table class="graph">
-<tr>
-<td>
-  <table class="scale" style="height:{{graph_height}}px;">
-   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max}}</td><tr>
-   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|multiply:2|floatformat:"0"}}</td><tr>
-   <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|floatformat:"0"}}</td><tr>
-   <tr><td height=""></td><tr>
-  </table>
-</td>
-{% for es in entries %}
-<td><div class="y" style="height:{{es.count|divide:max|multiply:graph_height|floatformat:"0"}}px"></div></td>
-{% endfor %}
-</tr><tr>
-<td></td>
-{% for es in entries %}
-<td>{% if form.cleaned_data.display_by == form.TIME_OF_THE_DAY %}{{forloop.counter0}}{% elif form.cleaned_data.display_by == form.DAY_OF_THE_WEEK %}{% if es %}<span class="vertical">{{es.0.created|date:"l"}}</span>{% else %}_{% endif %}{% elif form.cleaned_data.display_by == form.YEAR %}<span class="vertical">{{es.0.created|date:"Y"}}</span>{% else %}{{forloop.counter}}{% endif %}</td>
-{% endfor %}
-</tr>
-</table>
-
+<div class="overflow">
+  <div class="graph">
+    <table>
+    <tr>
+    <td>
+      <table class="scale" style="height:{{graph_height}}px;">
+       <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max}}</td><tr>
+       <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|multiply:2|floatformat:"0"}}</td><tr>
+       <tr><td height="{{graph_height|divide:3|floatformat:"0"}}">{{max|divide:3|floatformat:"0"}}</td><tr>
+       <tr><td height=""></td><tr>
+      </table>
+    </td>
+    {% for es in entries %}
+    <td><div class="y" style="height:{{es.count|divide:max|multiply:graph_height|floatformat:"0"}}px"></div></td>
+    {% endfor %}
+    </tr><tr>
+    <td></td>
+    {% for es in entries %}
+    <td>{% if form.cleaned_data.display_by == form.TIME_OF_THE_DAY %}{{forloop.counter0}}{% elif form.cleaned_data.display_by == form.DAY_OF_THE_WEEK %}{% if es %}<span class="vertical">{{es.0.created|date:"l"}}</span>{% else %}_{% endif %}{% elif form.cleaned_data.display_by == form.YEAR %}<span class="vertical">{{es.0.created|date:"Y"}}</span>{% else %}{{forloop.counter}}{% endif %}</td>
+    {% endfor %}
+    </tr>
+    </table>
+  </div>
+</div>
 <div class="path-hits">
-<h4>{% trans "Path Counter" %}</h4>
-<div><table>
-  <thead>
-    <tr><th>{% trans "Hits" %}</th><th>{% trans "Paths" %}</th></tr>
-  </thead>
-  <tbody>{% for path_hit in path_hits %}
-    <tr><td>{{path_hit.c}}</td><td>{{path_hit.path__name}}</td></tr>{% endfor %}
-  </tbody>
-</table></div>
+  <h4>{% trans "Path Counter" %}</h4>
+  <div><table>
+    <thead>
+      <tr><th>{% trans "Hits" %}</th><th>{% trans "Paths" %}</th></tr>
+    </thead>
+    <tbody>{% for path_hit in path_hits %}
+      <tr><td>{{path_hit.c}}</td><td>{{path_hit.path__name}}</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
 </div>
 
 {% endif %}
