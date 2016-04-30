@@ -30,8 +30,12 @@ class SearchEntriesForm(forms.Form):
         (YEAR,_('Year')),
     )
     
-    start_date = forms.DateField(label=_('Start Date'),required=False)
-    end_date = forms.DateField(label=_('End Date'),required=False)
+    start_date = forms.DateField(label=_('Start Date'),required=False,
+        widget=forms.DateInput(attrs={'type':'date'})
+    )
+    end_date = forms.DateField(label=_('End Date'),required=False,
+        widget=forms.DateInput(attrs={'type':'date'})
+    )
     users = forms.ChoiceField(label=_('Users'),initial=ALL,choices=USER_CHOICES)
     display_by = forms.ChoiceField(label=_('Display By'),initial=DAY_OF_THE_MONTH,choices=DISPLAY_BY_CHOICES)
     path = forms.CharField(label=_('Path'),required=False, widget=forms.TextInput(attrs={'placeholder': _('All')}))

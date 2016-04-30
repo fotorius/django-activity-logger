@@ -6,6 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.db.models import Count
 from datetime import timedelta
+from django.utils.dateparse import parse_datetime
 
 #i18n
 from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
@@ -82,8 +83,8 @@ def traffic(request):
     else:
         # Initialize form
         form = SearchEntriesForm(initial={
-            'start_date':filtered_entries.last().created-timedelta(days=1),
-            'end_date':filtered_entries.first().created,
+            'start_date':(filtered_entries.last().created-timedelta(days=1)).strftime('%Y-%m-%d'),
+            'end_date':filtered_entries.first().created.strftime('%Y-%m-%d'),
         })
         display_by = form.fields['display_by'].initial
     
