@@ -92,7 +92,8 @@ def traffic(request):
     TODO: Show more information about the traffic such as location count and 
     most visited pages
     """
-    update_entry_locations(filtered_entries)
+    # Fetching all locations here makes this very slow
+    #update_entry_locations(filtered_entries)
     
     # Calculate graph
     entries = []
