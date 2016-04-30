@@ -1,5 +1,7 @@
 {% extends 'activity_logger/base.html' %}
 
+{% load i18n %}
+
 {% block styles %}{{block.super}}
 {% endblock %}
 
@@ -11,7 +13,7 @@
     <li><a href="#{{tab.anchor}}" data-remote="{{tab.remote}}" data-toggle="container" data-target="#main-panel" >{{tab.title}}</a></li>{% endfor %}
   </ul>
 </div>
-<div id="main-panel"></div>
+<div id="main-panel">{% trans "Loading..." %}</div>
 {% endblock %}
 {% block scripts %}{{block.super}}
 <script>
@@ -38,6 +40,8 @@ function initTabs(data_toggle){
       if(xhttp.status == 0 && xhttp.readyState == 1){
         xhttp.abort();
       }
+      // Add loading message on main-panel
+      document.getElementById('main-panel').innerHTML = '{% trans "Loading..." %}';
       xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
           document.getElementById('main-panel').innerHTML = xhttp.responseText;

@@ -1,6 +1,8 @@
+{% load i18n %}
+<div id="loading-locations" style="text-align: center;font-family:'Trebuchet MS', Helvetica, sans-serif">{% trans "Retrieving Locations..." %}</div>
 <div id="map"></div>
 <script>
-//Load google maps
+// Load google maps
 function initMap() {
   var myLatLng = {lat: 15, lng: -19};
   map = new google.maps.Map(document.getElementById('map'), {
@@ -8,10 +10,10 @@ function initMap() {
     center: myLatLng
   });
   google.maps.event.addListenerOnce(map, 'idle', function(){
-    //Get markers when map is fully loaded
+    // Get markers when map is fully loaded
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
+      if (xhttp.readyState == 4 && xhttp.status == 200){
         data = JSON.parse(xhttp.responseText);
         for(l in data){
           var myLatLng = new google.maps.LatLng(data[l].fields.latitude,data[l].fields.longitude);
@@ -21,6 +23,8 @@ function initMap() {
             title: data[l].fields.country
           });
         }
+        // Remove loading message
+        document.getElementById('loading-locations').innerHTML = '';
       }
     };
     xhttp.open("GET", "{% if get_locations_url %}{{get_locations_url}}{% else %}{% url 'activity_logger/get_locations' %}{% endif %}", true);
