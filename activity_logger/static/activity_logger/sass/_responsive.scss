@@ -13,6 +13,10 @@
         position: inherit;
         padding: 0;
         width: 100%;
+        border: none;
+        ul>li>a{
+          width: initial;
+        }
       }
       &>#main-panel{
         margin: 0;
