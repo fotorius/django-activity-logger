@@ -16,6 +16,7 @@ body.dashboard{
     @include transform(rotate(90deg),translate(-50%));
     display:inline-block;
     width: 25px;
+    margin-bottom: 55px;
   }
   #main-panel{
     text-align: center;
