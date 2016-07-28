@@ -76,7 +76,7 @@ setup(
     author_email='alfredo.rius@gmail.com',
     packages=get_packages('activity_logger'),
     package_data=get_package_data('activity_logger'),
-    install_requires=[],
+    install_requires=['urllib3'],
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
