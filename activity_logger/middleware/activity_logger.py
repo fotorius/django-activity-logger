@@ -1,6 +1,5 @@
 
-from ..models import *
-from ..utils import *
+from activity_logger.utils import log_entry
 
 
 class ActivityLoggerMiddleware(object):
