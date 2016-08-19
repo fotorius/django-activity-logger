@@ -1,9 +1,11 @@
 
-from activity_logger.utils import log_entry
+from ..utils import log_entry
 
 
-class ActivityLoggerMiddleware(object):
+def ActivityLoggerMiddleware(get_response):
     # Log Activity
-    def process_request(self, request):
+    def process_request(request):
        request.log_entry = log_entry(request,'')
-       return None
+       return get_response(request)
+
+    return process_request
