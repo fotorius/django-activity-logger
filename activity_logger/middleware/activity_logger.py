@@ -2,7 +2,7 @@
 from ..utils import log_entry
 
 
-def ActivityLoggerMiddleware():
+def ActivityLoggerMiddleware(get_response):
     # Log Activity
     def process_request(request):
        request.log_entry = log_entry(request,'')
