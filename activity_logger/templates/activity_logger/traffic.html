@@ -23,7 +23,7 @@
     </tr><tr>
     <td></td>
     {% for es in entries %}
-    <td>{% if form.cleaned_data.display_by == form.TIME_OF_THE_DAY %}{{forloop.counter0}}{% elif form.cleaned_data.display_by == form.DAY_OF_THE_WEEK %}{% if es %}<span class="vertical">{{es.0.created|date:"l"}}</span>{% else %}_{% endif %}{% elif form.cleaned_data.display_by == form.YEAR %}<span class="vertical">{{es.0.created|date:"Y"}}</span>{% else %}{{forloop.counter}}{% endif %}</td>
+    <td>{% if form.cleaned_data.display_by == form.TIME_OF_THE_DAY %}{{forloop.counter0}}{% elif form.cleaned_data.display_by == form.DAY_OF_THE_WEEK %}{% if es %}<span class="vertical">{{es.0.created|date:"l"}}</span>{% else %}_{% endif %}{% elif form.cleaned_data.display_by == form.MONTH %}{% if es %}<span class="vertical">{{es.0.created|date:"F"}}</span>{% else %}_{% endif %}{% elif form.cleaned_data.display_by == form.YEAR %}<span class="vertical">{{es.0.created|date:"Y"}}</span>{% else %}{{forloop.counter}}{% endif %}</td>
     {% endfor %}
     </tr>
     </table>

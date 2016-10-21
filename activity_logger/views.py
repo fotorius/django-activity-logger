@@ -120,6 +120,12 @@ def traffic(request):
             if entries[i].count() > max:
                 max = entries[i].count()
     
+    elif display_by == form.MONTH:
+        for i in range(1,13):
+            entries.append(filtered_entries.filter(created__month=i))
+            if entries[i-1].count() > max:
+                max = entries[i-1].count()
+    
     elif display_by == form.YEAR:
         i = 0
         for year in range(filtered_entries.first().created.year,filtered_entries.last().created.year+1):

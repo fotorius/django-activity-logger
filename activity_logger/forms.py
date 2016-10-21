@@ -21,12 +21,14 @@ class SearchEntriesForm(forms.Form):
     DAY_OF_THE_MONTH = '0'
     DAY_OF_THE_WEEK = '1'
     TIME_OF_THE_DAY = '2'
-    YEAR = '3'
+    MONTH = '3'
+    YEAR = '4'
 
     DISPLAY_BY_CHOICES = (
         (DAY_OF_THE_MONTH,_('Day of the Month')),
         (DAY_OF_THE_WEEK,_('Day of the Week')),
         (TIME_OF_THE_DAY,_('Time of the day')),
+        (MONTH,_('Month')),
         (YEAR,_('Year')),
     )
     
