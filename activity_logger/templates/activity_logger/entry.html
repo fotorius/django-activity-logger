@@ -1,0 +1,27 @@
+
+{% load i18n %}
+<div class="path-hits">
+<div class="top">
+<a href="#traffic" class="back" data-remote="{% url 'activity_logger/path' entry.path.id %}" data-toggle="container">&lt;&lt; {% trans "Back" %}</a>
+</div>
+<div>
+<table>
+<tbody>
+<tr><th>{% trans "ID" %}</th><td>{{ entry.id }}</td></tr>
+<tr><th>{% trans "HTTP Referer" %}</th><td>{{ entry.http_referer }}</td></tr>
+<tr><th>{% trans "HTTP User Agent" %}</th><td>{{ entry.http_user_agent }}</td></tr>
+<tr><th>{% trans "Remote Address" %}</th><td>{{ entry.remote_addr }}</td></tr>
+<tr><th>{% trans "Request Method" %}</th><td>{{ entry.request_method }}</td></tr>
+<tr><th>{% trans "Path" %}</th><td>{{ entry.path.name }}</td></tr>
+<tr><th>{% trans "User" %}</th><td>{{ entry.user.username }}</td></tr>
+<tr><th>{% trans "Created" %}</th><td>{{ entry.created|date:"SHORT_DATETIME_FORMAT" }}</td></tr>
+<tr><th>{% trans "Description" %}</th><td>{{ entry.description }}</td></tr>
+<tr><th>{% trans "Location" %}</th><td>{{ entry.location }}</td></tr>
+<tr><th>{% trans "Is Private" %}</th><td>{{ entry.remote_addr_is_private }}</td></tr>
+<tr><th>{% trans "Is Secure" %}</th><td>{{ entry.is_secure }}</td></tr>
+
+</tbody>
+</table>
+
+</div>
+</div>

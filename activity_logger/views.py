@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.core import serializers
@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 import json
 from time import sleep
 
-from models import Entry, Location
+from models import Entry, Location, Path
 from utils import update_entry_locations
 from forms import SearchEntriesForm 
 
@@ -135,7 +135,7 @@ def traffic(request):
             i += 1
     
     # Get path hits
-    path_hits = filtered_entries.values('path__name').annotate(c=Count('path')).order_by('-c')
+    path_hits = filtered_entries.values('path__name','path__id').annotate(c=Count('path')).order_by('-c')
 
     c = {
         'entries':entries,
@@ -148,6 +148,29 @@ def traffic(request):
         'path_hits':path_hits,
     }
     return render(request,'activity_logger/traffic.html',c)
+
+@staff_member_required
+def path(request,id):
+    """
+    Returns the of an specified path
+    """
+    path = get_object_or_404(Path,id=id)
+    c = {
+        'path':path,
+    }
+    return render(request,'activity_logger/path.html',c)
+
+
+@staff_member_required
+def entry(request,id):
+    """
+    Returns the of an specified hit
+    """
+    entry = get_object_or_404(Entry,id=id)
+    c = {
+        'entry':entry,
+    }
+    return render(request,'activity_logger/entry.html',c)
 
 @staff_member_required
 def locate_iframe(request):

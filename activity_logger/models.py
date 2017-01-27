@@ -34,6 +34,9 @@ class Path(models.Model):
     def __unicode__(self):
         return self.name
 
+    def entries(self):
+        return Entry.objects.filter(path__name=self.name)
+
 class Entry(models.Model):
     http_referer = models.CharField(_('HTTP Referer'),max_length=128,null=True)
     http_user_agent = models.TextField(_('HTTP User Agent'),null=True)

@@ -1,0 +1,24 @@
+
+{% load i18n %}
+
+<div class="path-hits">
+<div class="top">
+<a href="#traffic" class="back" data-remote="{% url 'activity_logger/traffic' %}" data-toggle="container">&lt;&lt; {% trans "Back" %}</a>
+</div>
+<h2>{{path}}</h2>
+<div>
+<table><thead>
+<tr>
+  <th>{% trans "ID" %}</th>
+  <th>{% trans "Created" %}</th>
+  <th>{% trans "User" %}</th>
+</tr>
+</thead>
+
+<tbody>
+{% for entry in path.entries %}
+<tr><td><a href="#traffic" data-remote="{% url 'activity_logger/entry' entry.id %}" data-toggle="container">{{entry.id}}</a></td><td>{{entry.created|date:"SHORT_DATETIME_FORMAT"}}</td><td>{{entry.user}}</td></tr>
+{% endfor %}
+</tbody></table>
+</div>
+</div>

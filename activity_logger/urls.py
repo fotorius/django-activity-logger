@@ -12,4 +12,10 @@ urlpatterns = [
     # Dashboard: Traffic
     url(r'^traffic/$', views.traffic,name='activity_logger/traffic'),
 
+    # Dashboard: Path
+    url(r'^path/(?P<id>\d+)/$', views.path,name='activity_logger/path'),
+
+    # Dashboard: Entry
+    url(r'^entry/(?P<id>\d+)/$', views.entry,name='activity_logger/entry'),
+
 ]

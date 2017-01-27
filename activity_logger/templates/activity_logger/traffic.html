@@ -36,10 +36,12 @@
       <tr><th>{% trans "Hits" %}</th><th>{% trans "Paths" %}</th></tr>
     </thead>
     <tbody>{% for path_hit in path_hits %}
-      <tr><td>{{path_hit.c}}</td><td>{{path_hit.path__name}}</td></tr>{% endfor %}
+      <tr><td>{{path_hit.c}}</td><td><a href="#traffic" data-remote="{% url 'activity_logger/path' path_hit.path__id %}" data-toggle="container">{{path_hit.path__name}}</a></td></tr>{% endfor %}
     </tbody>
   </table></div>
 </div>
 
 {% endif %}
 </div>
+
+

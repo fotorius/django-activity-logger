@@ -32,7 +32,7 @@ function setActiveTab(this_anchor){
 
 function initTabs(data_toggle){
   // Tabs initialization
-  var tabs = document.querySelectorAll('[data-toggle="'+data_toggle+'"]');
+  var tabs = document.querySelectorAll('.sidebar [data-toggle="'+data_toggle+'"]');
   for(var i=0;i<tabs.length;i++){
     // Add click event listeners to sidebar menu
     tabs[i].addEventListener('click',function(e){
@@ -50,6 +50,7 @@ function initTabs(data_toggle){
       }
       xhttp.open("GET", this.dataset.remote, true);
       xhttp.send();
+      document.body.scrollTop = 0;
     });
   }
   // Load current tab
@@ -59,6 +60,31 @@ function initTabs(data_toggle){
   // Or load first tab
   else if(tabs.length)// Automatically load first element
     tabs[0].click();
+}
+
+function initLinks(data_toggle){
+  // Link initialization
+  var links = document.querySelectorAll('#main-panel [data-toggle="'+data_toggle+'"]');
+  for(var i=0;i<links.length;i++){
+    // Add click event listeners to sidebar menu
+    links[i].addEventListener('click',function(e){
+      // Abort request if it is still alive
+      if(xhttp.status == 0 && xhttp.readyState == 1){
+        xhttp.abort();
+      }
+      // Add loading message on main-panel
+      document.getElementById('main-panel').innerHTML = '{% trans "Loading..." %}';
+      xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          document.getElementById('main-panel').innerHTML = xhttp.responseText;
+          setActiveTab(e.toElement.getAttribute('href'));
+        }
+      }
+      xhttp.open("GET", this.dataset.remote, true);
+      xhttp.send();
+      document.body.scrollTop = 0;
+    });
+  }
 }
 
 // Filters
@@ -79,6 +105,10 @@ function submitFilter(e){
 
 // Initialize tabs
 initTabs('container');
+
+xhttp.addEventListener("load", function(){
+  initLinks('container');
+});
 
 </script>
 

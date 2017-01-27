@@ -20,6 +20,15 @@ body.dashboard{
   }
   #main-panel{
     text-align: center;
+    .top{
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 20px;
+      .back{
+        float: left;
+      }
+    }
+
   }
   .map-iframe{
     width: 100%;
@@ -69,10 +78,6 @@ body.dashboard{
     }
   }
   .path-hits{
-    &>div{
-      max-height: 300px;
-      overflow-y: auto;
-    }
     table{
       display: inline-block;
       td{
