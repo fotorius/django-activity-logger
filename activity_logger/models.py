@@ -38,7 +38,7 @@ class Path(models.Model):
         return Entry.objects.filter(path__name=self.name)
 
 class Entry(models.Model):
-    http_referer = models.CharField(_('HTTP Referer'),max_length=128,null=True)
+    http_referer = models.CharField(_('HTTP Referer'),max_length=512,null=True)
     http_user_agent = models.TextField(_('HTTP User Agent'),null=True)
     remote_addr = models.CharField(_('Remote Address'),max_length=40)
     request_method = models.CharField(_('Request Method'),max_length=8)
