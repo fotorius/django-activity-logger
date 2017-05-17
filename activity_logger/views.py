@@ -62,7 +62,7 @@ def traffic(request):
        form = SearchEntriesForm(request.POST)
        if form.is_valid():
            # Filter Dates
-           filtered_entries = filtered_entries.filter(created__gte=form.cleaned_data['start_date'])
+           filtered_entries = filtered_entries.filter(created__gte=form.cleaned_data['start_date']-timedelta(days=31))
            filtered_entries = filtered_entries.filter(created__lte=form.cleaned_data['end_date']+timedelta(days=2))
 
 
@@ -86,7 +86,7 @@ def traffic(request):
     else:
         # Initialize form
         form = SearchEntriesForm(initial={
-            'start_date':(filtered_entries.first().created-timedelta(week=1)).strftime('%Y-%m-%d'),
+            'start_date':(filtered_entries.first().created-timedelta(days=31)).strftime('%Y-%m-%d'),
             'end_date':filtered_entries.first().created.strftime('%Y-%m-%d'),
         })
         display_by = form.fields['display_by'].initial
