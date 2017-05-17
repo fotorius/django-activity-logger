@@ -86,7 +86,7 @@ def traffic(request):
     else:
         # Initialize form
         form = SearchEntriesForm(initial={
-            'start_date':(filtered_entries.last().created-timedelta(days=1)).strftime('%Y-%m-%d'),
+            'start_date':(filtered_entries.first().created-timedelta(week=1)).strftime('%Y-%m-%d'),
             'end_date':filtered_entries.first().created.strftime('%Y-%m-%d'),
         })
         display_by = form.fields['display_by'].initial
