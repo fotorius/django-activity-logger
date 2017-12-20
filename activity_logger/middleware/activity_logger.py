@@ -1,6 +1,4 @@
-
 from ..utils import log_entry
-
 
 def ActivityLoggerMiddleware(get_response):
     # Log Activity

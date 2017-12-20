@@ -1,4 +1,4 @@
-from models import Entry, Location, Path
+from .models import Entry, Location, Path
 
 
 def update_entry_locations(queryset):
@@ -38,7 +38,7 @@ def log_entry(request,description=None):
         remote_addr = request.META.get('REMOTE_ADDR'),
         path=path,
         request_method = request.META.get('REQUEST_METHOD')[:8],
-        user = request.user if not request.user.is_anonymous() else None,
+        user = request.user if not request.user.is_anonymous else None,
         description = description,
         is_secure = request.is_secure(),
     )

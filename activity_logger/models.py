@@ -23,7 +23,7 @@ class Location(models.Model):
     as_name = models.CharField(_('AS number/name'),max_length=32,blank=True) 
     created = models.DateTimeField(_('Created'),auto_now_add=True)
     
-    def __unicode__(self):
+    def __str__(self):
         if self.country and self.region:
             return "%s, %s" % (self.country,self.region)
         return str(self.created)
@@ -31,7 +31,7 @@ class Location(models.Model):
 class Path(models.Model):
     name = models.TextField(_('Name'))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def entries(self):
@@ -42,11 +42,11 @@ class Entry(models.Model):
     http_user_agent = models.TextField(_('HTTP User Agent'),null=True)
     remote_addr = models.CharField(_('Remote Address'),max_length=40)
     request_method = models.CharField(_('Request Method'),max_length=8)
-    path = models.ForeignKey(Path,verbose_name=_('Path'))
-    user = models.ForeignKey(User,verbose_name=_('User'),null=True,blank=True)
+    path = models.ForeignKey(Path,verbose_name=_('Path'),on_delete=models.CASCADE)
+    user = models.ForeignKey(User,verbose_name=_('User'),null=True,blank=True,on_delete=models.SET_NULL)
     created = models.DateTimeField(_('Created'),auto_now_add=True)
     description = models.CharField(_('Description'),max_length=128,null=True,blank=True)
-    location = models.ForeignKey(Location,verbose_name=_('Location'),null=True,blank=True)
+    location = models.ForeignKey(Location,verbose_name=_('Location'),null=True,blank=True,on_delete=models.SET_NULL)
     remote_addr_is_private = models.NullBooleanField(null=True)
     is_secure = models.BooleanField(_('Is Secure'),default=False)
 
@@ -54,7 +54,7 @@ class Entry(models.Model):
         verbose_name_plural = _('entries')
         ordering = ('-created',)
    
-    def __unicode__(self):
+    def __str__(self):
         return self.description
 
     def get_location(self,force=False):
