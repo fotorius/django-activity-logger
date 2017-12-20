@@ -45,7 +45,7 @@ def get_package_data(package):
 version = get_version('activity_logger')
 
 if sys.argv[-1] == 'publish':
-    print "Not implemented"
+    print("Not implemented")
     sys.exit()
     """
     if os.system("pip freeze | grep wheel"):
