@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from django.db.models import Q
 import urllib3, json
@@ -43,7 +43,7 @@ class Entry(models.Model):
     remote_addr = models.CharField(_('Remote Address'),max_length=40)
     request_method = models.CharField(_('Request Method'),max_length=8)
     path = models.ForeignKey(Path,verbose_name=_('Path'),on_delete=models.CASCADE)
-    user = models.ForeignKey(User,verbose_name=_('User'),null=True,blank=True,on_delete=models.SET_NULL)
+    user = models.ForeignKey(get_user_model(),verbose_name=_('User'),null=True,blank=True,on_delete=models.SET_NULL)
     created = models.DateTimeField(_('Created'),auto_now_add=True)
     description = models.CharField(_('Description'),max_length=128,null=True,blank=True)
     location = models.ForeignKey(Location,verbose_name=_('Location'),null=True,blank=True,on_delete=models.SET_NULL)
