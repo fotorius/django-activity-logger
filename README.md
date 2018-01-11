@@ -9,7 +9,7 @@ field modification.
 
 Install in your environment:
 ```
-pip install git+https://github.com/devalfrz/django-activity-logger
+pip install django-activity-logger
 ```
 
 Incude the app in the `INSTALLED_APPS` section of your project:

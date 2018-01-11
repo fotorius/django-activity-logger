@@ -45,9 +45,6 @@ def get_package_data(package):
 version = get_version('activity_logger')
 
 if sys.argv[-1] == 'publish':
-    print("Not implemented")
-    sys.exit()
-    """
     if os.system("pip freeze | grep wheel"):
         print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
         sys.exit()
@@ -61,22 +58,22 @@ if sys.argv[-1] == 'publish':
     print("  git push --tags")
     shutil.rmtree('dist')
     shutil.rmtree('build')
-    shutil.rmtree('djangobase.egg-info')
+    shutil.rmtree('django-activity-logger.egg-info')
     sys.exit()
-    """
 
 
 setup(
     name='django-activity-logger',
     version=version,
-    url='https://git.behuns.com/django-activity-logger',
+    url='https://github.com/devalfrz/django-activity-logger',
     license='BSD',
-    description='Django Activity logger.',
+    description='Simple tool for logging activity in Django.',
     author='Alfredo Rius',
     author_email='alfredo.rius@gmail.com',
     packages=get_packages('activity_logger'),
     package_data=get_package_data('activity_logger'),
-    install_requires=['urllib3'],
+    include_package_data=True,
+    install_requires=['urllib3',],
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
